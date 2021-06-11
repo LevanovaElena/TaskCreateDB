@@ -1,14 +1,14 @@
-CREATE DATABASE CustomerDB_LevanovaEl
+CREATE DATABASE CustomerDB_Levanova
 go
 
-use CustomerDB_LevanovaEl
+use CustomerDB_Levanova
 
 go
 
 CREATE TABLE Customer (
     CustomerId int IDENTITY(1,1) CONSTRAINT PK_CustomerId PRIMARY KEY,
 	FirstName varchar(50),
-    LastName varchar(50) NOT NULL,
+    LastName varchar(50) NOT NULL UNIQUE,
     CustomerPhoneNumber varchar(15) NOT NULL,
 	CustomerEmail varchar(255),
     TotalPurchasesAmount  Money,
@@ -26,14 +26,14 @@ go
 
 CREATE TABLE AddressCustomer  (
     AddressId int IDENTITY(1,1) CONSTRAINT PK_AddressId PRIMARY KEY,
-	CustomerId int,
+	CustomerId int NOT NULL,
 	AddressLine varchar(100)NOT NULL,
     AddressLine2 varchar(100) ,
-    AddressType varchar(15) NOT NULL CHECK (AddressType='Shipping' OR AddressType='Billing'),
+    AddressType varchar(15) NOT NULL CHECK (AddressType IN ('Shipping', 'Billing')),
 	City varchar(50) NOT NULL,
 	PostalCode char(6) NOT NULL,
     [State]  char(20) NOT NULL,
-	Country  varchar(255) NOT NULL CHECK (Country='United States' OR Country='Canada'),
+	Country  varchar(255) NOT NULL CHECK ( Country IN ('United States', 'Canada'))
 )
 
 
@@ -52,8 +52,3 @@ ALTER TABLE AddressCustomer
       ON DELETE CASCADE
       ON UPDATE CASCADE
 
-go
- select * from Customer
-
- go
- select * from AddressCustomer
