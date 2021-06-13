@@ -1,4 +1,4 @@
-use customer_db_Levanova1
+use customer_db_Levanova
 
 GO
 
@@ -8,10 +8,11 @@ INSERT INTO dbo.customers (first_name,last_name,phone_number,customer_email,tota
 VALUES ('Ivan','Ivanov','+37494360360','ivan@gmail.com',785);
 
 INSERT INTO dbo.address_customer(address_line,address_line2,address_type,postal_code,[state],country,city,customer_id)
-VALUES ('Filipova 23','Lenina 23','Billing','123456','State','Canada','Ottawa',(SELECT TOP 1 dbo.customers.customer_id from dbo.customers where dbo.customers.last_name='Ivanov'))
+VALUES ('Filipova 45','Lenina 45','Billing','123456','State','Canada','Ottawa',
+		(SELECT TOP 1 dbo.customers.customer_id from dbo.customers where dbo.customers.last_name='Ivanov'))
 
 INSERT INTO dbo.Notes(note_text,customer_id)
-VALUES ('Filipova 23Ottawa',(SELECT TOP 1 dbo.customers.customer_id from dbo.customers where dbo.customers.last_name='Ivanov'))
+VALUES ('Filipova 23OttawaNotes2',(SELECT TOP 1 dbo.customers.customer_id from dbo.customers where dbo.customers.last_name='Ivanov'))
 
 
 GO 
