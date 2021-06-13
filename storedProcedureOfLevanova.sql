@@ -53,4 +53,4 @@ END;
 
 GO
 
-EXEC CustomerCrud10
+EXEC CustomerCrud
